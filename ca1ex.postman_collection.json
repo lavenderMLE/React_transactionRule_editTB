@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "af262603-15cd-4426-b384-dc5cc352d67d",
+		"name": "ca1ex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19251288"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"arthur.chen330@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"refferal_code\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.10.11.104:5000/v1/ex/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"10",
+						"10",
+						"11",
+						"104"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"ex",
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"arthur.chen330@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.10.11.104:5000/v1/ex/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"10",
+						"10",
+						"11",
+						"104"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"ex",
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin-SignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"arthur.chen330@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.10.11.104:5000/v1/ex/admin/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"10",
+						"10",
+						"11",
+						"104"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"ex",
+						"admin",
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"arthur.chen330@gmail.com\",\r\n    \"first_name\": \"Arthur\",\r\n    \"last_name\": \"Chen\",\r\n    \"country\" : \"US\",\r\n    \"city\" : \"New York\" ,\r\n    \"street\" : \"Queen\",\r\n    \"postal_code\" : \"10001\" ,\r\n    \"birthday\" : \"03/30/1999\" ,\r\n    \"language\" : \"english\",\r\n    \"is_enable_fa\" : false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.10.11.104:5000/v1/ex/api/auth/profile",
+					"protocol": "http",
+					"host": [
+						"10",
+						"10",
+						"11",
+						"104"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"ex",
+						"api",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditProfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"arthur.chen330@gmail.com\",\r\n    \"first_name\": \"Arthur\",\r\n    \"last_name\": \"Chen\",\r\n    \"country\" : \"US\",\r\n    \"city\" : \"New York\" ,\r\n    \"street\" : \"Queen\",\r\n    \"postal_code\" : \"10001\" ,\r\n    \"birthday\" : \"03/30/1999\" ,\r\n    \"language\" : \"english\",\r\n    \"is_enable_fa\" : \"false\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.10.11.104:5000/v1/ex/api/auth/profile",
+					"protocol": "http",
+					"host": [
+						"10",
+						"10",
+						"11",
+						"104"
+					],
+					"port": "5000",
+					"path": [
+						"v1",
+						"ex",
+						"api",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
