@@ -6,11 +6,10 @@ import { NonEditTB } from '../../../shared/ui/Table/NonEditTB';
 
 import { Grid } from '@mui/material';
 import styled from "styled-components";
-import { useTabsDescendantsContext } from '@chakra-ui/react';
 
 
-const title = "Transfer Balances";
-// const title = "Import Accounts & Cust Tables"
+// const title = "Transfer Balances";
+const title = "Import Accounts & Cust Tables"
 
 const tbName = [
     "ACCNT",
@@ -33,58 +32,76 @@ var tbContent = {
     emp : [],
     otherName : [],
 };
+var accntsName_Type = {
+    name : [],
+    type : [],
+}
 
 
 
-export const AccountsView = () => {
+export const AccountsView = (props) => {
     
-    const [ selectedItem , setItem ] = React.useState(0);
-    const [ data, setData ] = React.useState([]) ;
+    const { accnts_tb , setAccntsTb } = props ;
+    const { accntsName , setAccntsName } = props ;
+    const { accntsType , setAccntsType } = props ;
+
+    const [ selectedItem , setItem ] = React.useState(0);    
 
     const [ selectedTBHeader , setTbHeader ] = React.useState([]) ;
     const [ selectedTBContent , setTbContent ] = React.useState([]) ;
 
     React.useEffect(() => {
-        data.map((ele, idx) => {                   
+        accnts_tb.map((ele, idx) => {                   
             switch( ele[0] ) {
                 case '!ACCNT' :
-                    tbHeader.accnt = ele.slice( 1, ele.length-1 ) ;
+                    tbHeader.accnt = ele.slice( 1, ele.length ) ;
                     break;
                 case 'ACCNT' :                    
-                    tbContent.accnt.push( ele.slice( 1, ele.length-1 ) );                                        
+                    tbContent.accnt.push( ele.slice( 1, ele.length ) );                                        
                     break;
 
                 case '!CUST' :
-                    tbHeader.cust = ele.slice( 1, ele.length-1 ) ;
+                    tbHeader.cust = ele.slice( 1, ele.length ) ;
                     break;
                 case 'CUST' :
-                    tbContent.cust.push( ele.slice( 1, ele.length-1 ) );
+                    tbContent.cust.push( ele.slice( 1, ele.length ) );
                     break;
 
                 case '!VEND' :
-                    tbHeader.vend = ele.slice( 1, ele.length-1 ) ;
+                    tbHeader.vend = ele.slice( 1, ele.length ) ;
                     break;
                 case 'VEND' :
-                    tbContent.vend.push( ele.slice( 1, ele.length-1 ) );
+                    tbContent.vend.push( ele.slice( 1, ele.length ) );
                     break;
 
                 case '!EMP' :
-                    tbHeader.emp = ele.slice( 1, ele.length-1 ) ;
+                    tbHeader.emp = ele.slice( 1, ele.length ) ;
                     break;
                 case 'EMP' :
-                    tbContent.emp.push( ele.slice( 1, ele.length-1 ) );
+                    tbContent.emp.push( ele.slice( 1, ele.length ) );
                     break;
 
                 case '!OTHERNAME' :
-                    tbHeader.otherName = ele.slice( 1, ele.length-1 ) ;
+                    tbHeader.otherName = ele.slice( 1, ele.length ) ;
                     break;
                 case 'OTHERNAME' :
-                    tbContent.otherName.push( ele.slice( 1, ele.length-1 ) );                
+                    tbContent.otherName.push( ele.slice( 1, ele.length ) );                
                     break;
-            }                        
+            }
         })
 
-    }, [ data ]) ;
+        // save the accnts name and type
+        tbContent.accnt.map((ele, idx) => {
+            accntsName_Type.name.push( ele[0] ) ;
+            accntsName_Type.type.push( ele[3] ) ;
+        }) ;
+
+        var temp_accntsType = [ ...new Set(accntsName_Type.type) ] ;
+
+        setAccntsName( accntsName_Type.name ) ;
+        setAccntsType( temp_accntsType ) ;
+
+    }, [ accnts_tb ]) ;
 
     React.useEffect(() => {
         switch( selectedItem ) {
@@ -110,7 +127,7 @@ export const AccountsView = () => {
                 break;
         }        
         
-    } , [ selectedItem , data ])
+    } , [ selectedItem , accnts_tb ])
 
     return (
         <RootDiv>
@@ -121,12 +138,12 @@ export const AccountsView = () => {
             <Box>
                 <BrowseDiv>
                     Import : &nbsp;
-                    <CustomCSVReader endAdornmentText="Browse" setData={setData} />                                    
+                    <CustomCSVReader endAdornmentText="Browse" setData={setAccntsTb} />                                    
                 </BrowseDiv>
                 {
-                    data.length > 0 ?   <TableDiv>
+                    accnts_tb.length > 0 ?   <TableDiv>
                                             <NameDiv>
-                                                <GridContainer cotainer  >
+                                                <GridContainer container  >
                                                     <Grid item xs={0.2} />
                                                     <Grid item  xs={4.8} >
                                                         <SelectComponent 
