@@ -13,8 +13,12 @@ export const NonEditTB = (props) => {
     const [ page, setPage ] = React.useState(0);
     const [ rowsPerPage , setRowsPerPage ] = React.useState(5);
     const [ tempTBcontent , setTempTBcontent ] = React.useState([]) ;
+
+    let isPagenated ;
     
-    let isPagenated =  Boolean( parseInt( tbContent.length / rowsPerPage ) ) ;    
+    if ( tbContent ) {        
+        isPagenated =  Boolean( parseInt( tbContent.length / rowsPerPage ) ) ;    
+    }
 
     const handleChangePage = (e, newPage) => {
         setPage(newPage);        
@@ -25,10 +29,13 @@ export const NonEditTB = (props) => {
     }
 
     React.useEffect( () => {
-        let temp = tbContent.slice( page * rowsPerPage , page * rowsPerPage + rowsPerPage ) ;
+        let temp ;
+        if( tbContent ) {
+            temp = tbContent.slice( page * rowsPerPage , page * rowsPerPage + rowsPerPage ) ;
+        }        
         setTempTBcontent( temp ) ;
         
-    } , [ page , rowsPerPage , tbHeader ])
+    } , [ page , rowsPerPage , tbHeader , tbContent ])
 
 
     return (
@@ -37,33 +44,40 @@ export const NonEditTB = (props) => {
                 <TableHead>
                     <TableRow >
                         {
-                            tbHeader.map((ele, idx) => (
-                                <TableCell align='center' size='small' key={idx}>
-                                    {ele}
-                                </TableCell>
-                            ))
+                            tbHeader && tbHeader.map((ele, idx) => (
+                                            <TableCell align='center' size='small' key={idx}>
+                                                {ele}
+                                            </TableCell>
+                                        ))
                         }                                                                         
                     </TableRow>
                 </TableHead>
                 <TableBody>
                 {                    
-                    tempTBcontent.map( (ele, idx) =>(
-                        <TableRow key={idx}>
-                            {
-                                ele.map((item , id ) => (
-                                    <TableCell size="small" align="center" key={id}>
-                                        {item}
-                                    </TableCell>
-                                ))
-                            }
-                        </TableRow>
-                    ))                    
+                    tempTBcontent &&    tempTBcontent.map( (ele, idx) =>(                        
+                                            <TableRow key={idx}>
+                                                {
+                                                    Array.isArray(ele) ?    ele.map((item , id ) => (
+                                                                                <TableCell size="small" align="center" key={id}>
+                                                                                    {item}                                                                                    
+                                                                                </TableCell>
+                                                                            )) :
+                                                                            Object.entries(ele).map(([id, name]) => {       
+                                                                                return (
+                                                                                        <TableCell size="small" align='center' key={id}>
+                                                                                            {name}                                                                                    
+                                                                                        </TableCell>                                                                                
+                                                                                )                                                                         
+                                                                            })                                                                                        
+                                                }
+                                            </TableRow>
+                                        ))                    
                 }                
                 </TableBody>
             </Table>
             <TbPaginationDiv 
                 component="div"
-                count={ tbContent.length }                
+                count={ tbContent ? tbContent.length : 5 }                
                 page={ page }
                 onPageChange={handleChangePage}
                 rowsPerPage={rowsPerPage}

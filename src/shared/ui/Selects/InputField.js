@@ -2,17 +2,19 @@
 import { TextField } from "@mui/material"
 import styled from "styled-components";
 
-export const InputField = ({ fullWidth=true }) => {
+export const InputField = ({ fullWidth=true , width }) => {
     return (
         <AmountTextField            
             id="outlined-disabled"
             size="small"   
             fullWidth={fullWidth}         
+            width={width}
         />              
     )
 }
 
 const AmountTextField = styled(TextField)`
+    width : ${props => props.width };
     background-color : #2a2d35;
     border-radius : 5px;
     
